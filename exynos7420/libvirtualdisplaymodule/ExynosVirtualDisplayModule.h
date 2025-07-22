@@ -10,18 +10,10 @@ class ExynosVirtualDisplayModule : public ExynosVirtualDisplay {
 #ifdef USES_VDS_OTHERFORMAT
         virtual bool isSupportGLESformat();
 #endif
+	virtual int32_t getDisplayAttributes(const uint32_t attribute, uint32_t config = 0);
         virtual void determineBandwidthSupport(hwc_display_contents_1_t *contents);
         virtual void configureWriteBack(hwc_display_contents_1_t *contents,
         decon_win_config_data &win_data);
-		virtual int32_t getDisplayAttributes(const uint32_t attribute);
 };
 
-enum {
-    HWC_DISPLAY_COMPOSITION_TYPE = 0,
-    HWC_DISPLAY_GLES_FORMAT,
-    HWC_DISPLAY_SINK_BQ_FORMAT,
-    HWC_DISPLAY_SINK_BQ_USAGE,
-    HWC_DISPLAY_SINK_BQ_WIDTH,
-    HWC_DISPLAY_SINK_BQ_HEIGHT
-};
 #endif

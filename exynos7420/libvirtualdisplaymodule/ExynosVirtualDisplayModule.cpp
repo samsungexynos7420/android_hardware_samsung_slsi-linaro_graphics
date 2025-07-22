@@ -29,7 +29,7 @@ ExynosVirtualDisplayModule::~ExynosVirtualDisplayModule()
 
 void ExynosVirtualDisplayModule::determineBandwidthSupport(hwc_display_contents_1_t *contents)
 {
-	mAllowedOverlays = min(mAllowedOverlays, DECON_2_MAX_OVERLAY_COUNT);
+    mAllowedOverlays = min(mAllowedOverlays, DECON_2_MAX_OVERLAY_COUNT);
     ExynosVirtualDisplay::determineBandwidthSupport(contents);
 }
 
@@ -45,19 +45,11 @@ void ExynosVirtualDisplayModule::configureWriteBack(hwc_display_contents_1_t *co
 #ifdef USES_VDS_OTHERFORMAT
 bool ExynosVirtualDisplayModule::isSupportGLESformat()
 {
-    switch (mGLESFormat) {
-        case HAL_PIXEL_FORMAT_RGBA_8888:
-        case HAL_PIXEL_FORMAT_BGRA_8888:
-        case HAL_PIXEL_FORMAT_EXYNOS_YCbCr_420_SP_M:
-        case HAL_PIXEL_FORMAT_EXYNOS_YCrCb_420_SP_M:
-            return true;
-        default:
-            return false;
-    }
+    return mGLESFormat == HAL_PIXEL_FORMAT_BGRA_8888;
 }
 #endif
 
-int32_t ExynosVirtualDisplayModule::getDisplayAttributes(const uint32_t attribute)
+int32_t ExynosVirtualDisplayModule::getDisplayAttributes(const uint32_t attribute, uint32_t __unused config)
 {
     switch(attribute) {
         case HWC_DISPLAY_COMPOSITION_TYPE:
@@ -65,9 +57,6 @@ int32_t ExynosVirtualDisplayModule::getDisplayAttributes(const uint32_t attribut
         case HWC_DISPLAY_GLES_FORMAT:
             return mGLESFormat;
         case HWC_DISPLAY_SINK_BQ_FORMAT:
-            if (mIsRotationState)
-                return -1;
-            else
                 return mGLESFormat;
         case HWC_DISPLAY_SINK_BQ_USAGE:
             return mSinkUsage;
