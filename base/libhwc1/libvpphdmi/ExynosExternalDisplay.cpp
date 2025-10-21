@@ -421,13 +421,13 @@ void ExynosExternalDisplay::determineYuvOverlay(hwc_display_contents_1_t *conten
                         if ((getDrmMode(handle->flags) != NO_DRM) &&
                                 (supportedInternalMPP != NULL)) {
                             if (WIDTH(layer.displayFrame) < supportedInternalMPP->getMinWidth(layer)) {
-                                ALOGE("determineYuvOverlay layer %d displayFrame width %d is smaller than vpp minWidth %d",
+                                ALOGE("determineYuvOverlay layer %zu displayFrame width %d is smaller than vpp minWidth %d",
                                     i, WIDTH(layer.displayFrame), supportedInternalMPP->getMinWidth(layer));
                                 layer.displayFrame.right = layer.displayFrame.left +
                                     ALIGN_DOWN(WIDTH(layer.displayFrame), supportedInternalMPP->getMinWidth(layer));
                             }
                             if (HEIGHT(layer.displayFrame) < supportedInternalMPP->getMinHeight(layer)) {
-                                ALOGE("determineYuvOverlay layer %d displayFrame height %d is smaller than vpp minHeight %d",
+                                ALOGE("determineYuvOverlay layer %zu displayFrame height %d is smaller than vpp minHeight %d",
                                     i, HEIGHT(layer.displayFrame), supportedInternalMPP->getMinHeight(layer));
                                 layer.displayFrame.bottom = layer.displayFrame.top +
                                     ALIGN_DOWN(HEIGHT(layer.displayFrame), supportedInternalMPP->getMinHeight(layer));
